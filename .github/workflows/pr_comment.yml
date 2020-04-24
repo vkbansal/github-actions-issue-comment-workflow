@@ -17,12 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event.comment.body == 'Hello World!') && (github.event.comment.user.type == 'User')
     steps:
-      - env:
-          COMMENT_URL: ${{ github.event.comment.issue_url }}
-          USER: ${{ github.event.comment.user.login }}
-        run: |
+      - run: |
           curl \
             -H "Content-Type: application/json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -d "{\"body\": \"@$USER\"}" \
-            -X POST "$COMMENT_URL/comments"
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"body\": \"@${{ github.event.comment.user.login }}\"}" \
+            -X POST "${{ github.event.comment.issue_url }}/comments"
