@@ -1,0 +1,13 @@
+name: PR Comment
+on:
+  issue_comment: [created]
+
+jobs:
+  test_job:
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          DATA: ${{ toJSON(github) }}
+        run: |
+          echo $DATA
