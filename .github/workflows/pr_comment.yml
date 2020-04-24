@@ -12,3 +12,16 @@ jobs:
           DATA: ${{ toJSON(github) }}
         run: |
           echo $DATA
+  hello_world:
+    name: Say Hello
+    if: github.event.comment.body == "Hello World!" && github.event.comment.user.type == "User"
+    steps:
+      - env:
+          COMMENT_URL: ${{ github.event.comment.issue_url }}
+          USER: ${{ github.event.comment.user.login }}
+        run: |
+          curl
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d "{\"body\": \"@$USER\"}" \
+            -X POST "$COMMENT_URL/comments"
