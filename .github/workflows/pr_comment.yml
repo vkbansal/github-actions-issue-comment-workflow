@@ -15,7 +15,7 @@ jobs:
   hello_world:
     name: Say Hello
     runs-on: ubuntu-latest
-    if: (github.event.comment.body == "Hello World!") && (github.event.comment.user.type == "User")
+    if: (github.event.comment.body == 'Hello World!') && (github.event.comment.user.type == 'User')
     steps:
       - env:
           COMMENT_URL: ${{ github.event.comment.issue_url }}
