@@ -14,6 +14,7 @@ jobs:
           echo $DATA
   hello_world:
     name: Say Hello
+    runs-on: ubuntu-latest
     if: github.event.comment.body == "Hello World!" && github.event.comment.user.type == "User"
     steps:
       - env:
